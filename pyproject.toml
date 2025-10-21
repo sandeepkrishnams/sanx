@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sanx"
-version = "0.0.0"
+version = "0.1.0"
 description = "Small webserver and CLI for sanx"
 authors = [ { name = "You" } ]
 readme = "README.md"
@@ -13,7 +13,7 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-sanx = "sanx.cli:main"
+sanx = "sanx:main"
 
 [tool.black]
 line-length = 88

@@ -1,18 +1,17 @@
 from __future__ import annotations
 
+import socket
 import threading
 from typing import Tuple
+
+from sanx.exceptions import InvalidHostError, InvalidPortError, PortInUseError
 
 
 class SanxServer:
     """A very small server placeholder used for examples and basic testing.
-
-    This class intentionally contains lightweight implementations so linters
-    and type-checkers can reason about the public API. It is not a
-    production-ready HTTP server.
     """
 
-    def __init__(self, host: str, port: int) -> None:
+    def __init__(self, host: str, port: int, blocking=True) -> None:
         self.host = host
         self.port = port
         self._socket = None
@@ -25,24 +24,47 @@ class SanxServer:
         self.is_running = True
 
     def _verify_configuration(self) -> None:
-        # check if the host and port are valid
+        """Verify server configuration."""
         self._validate_host()
         self._validate_port()
 
     def _validate_host(self) -> None:
-        # Basic validation placeholder
+        """Validate a Given Host
+
+        Raises:
+            InvalidHostError: return message indicating invalid host
+        """
         if not isinstance(self.host, str) or not self.host:
-            raise ValueError("host must be a non-empty string")
+            raise InvalidHostError("self.host")
 
     def _validate_port(self) -> None:
-        # Basic validation placeholder
+        """Validate a port
+
+        Raises:
+            InvalidPortError: return message indicating invalid port
+        """
         if not isinstance(self.port, int) or not (0 < self.port < 65536):
-            raise ValueError("port must be an int between 1 and 65535")
+            raise InvalidPortError(self.port)
+
 
     def initialize(self) -> None:
-        """Prepare sockets, state, and internal structures."""
-        # placeholder for socket creation and other setup
-        self._socket = None
+        """Prepare socket and internal structures."""
+        # Validate host and port first
+        if not isinstance(self.host, str) or not self.host:
+            raise InvalidHostError(self.host)
+        if not isinstance(self.port, int) or not (1 <= self.port <= 65535):
+            raise InvalidPortError(self.port)
+
+        # Create the socket
+        try:
+            self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self._socket.settimeout(0.5)
+        except OSError as e:
+            # Typical errors: port in use or other OS-level socket errors
+            if e.errno in (98, 48):  # 98=Linux, 48=Mac
+                raise PortInUseError(self.port)
+            else:
+                raise ConnectionError(str(e))
 
     def serve_forever(self) -> None:
         """Main loop: accept and handle connections.
@@ -62,14 +84,23 @@ class SanxServer:
     def shutdown(self) -> None:
         """Cleanly close all connections and free resources."""
         self.is_running = False
-        # placeholder: close sockets, release resources
-        self._socket = None
+
+        if self._socket:
+            try:
+                # Stop both send and receive
+                self._socket.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                # Socket may already be closed or never connected
+                pass
+            finally:
+                self._socket.close()
+                self._socket = None
 
 
 def runserver(
     host: str = "127.0.0.1",
     port: int = 8080,
-    block: bool = True,
+    blocking: bool = True,
 ) -> SanxServer:
     """Convenience function to run a SanxServer.
 
@@ -79,7 +110,7 @@ def runserver(
     server = SanxServer(host=host, port=port)
     server.initialize()
 
-    if block:
+    if blocking:
         server.serve_forever()
         return server
 

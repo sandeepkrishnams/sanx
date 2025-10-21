@@ -1,0 +1,3 @@
+while running the server looks for system exist signal if any this got close  the server graicefully 
+handle the connection and build the request object and response object
+
