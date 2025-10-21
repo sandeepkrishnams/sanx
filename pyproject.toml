@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sanx"
+version = "0.0.0"
+description = "Small webserver and CLI for sanx"
+authors = [ { name = "You" } ]
+readme = "README.md"
+requires-python = ">=3.9"
+
+dependencies = []
+
+[project.scripts]
+sanx = "sanx.cli:main"
