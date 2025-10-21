@@ -1,0 +1,127 @@
+Week 1 – Basic HTTP/1.1 Server
+
+Goal: Build a minimal, working HTTP server with core logic in Python.
+
+Day 1: Implement a basic HTTP/1.1 server using asyncio or raw sockets.
+
+Day 2: Handle GET requests with proper responses.
+
+Day 3: Handle POST requests and parse request bodies.
+
+Day 4: Implement HTTP response headers and status codes.
+
+Day 5: Add basic logging of requests and responses.
+
+Day 6: Implement connection keep-alive support.
+
+Day 7: Add unit tests for HTTP request handling.
+
+Week 2 – Concurrency and Modular Interface
+
+Goal: Make server concurrent and modular so it can plug into any Python framework.
+
+Day 8: Add multi-threaded support for handling multiple clients.
+
+Day 9: Add multi-process support (e.g., using multiprocessing).
+
+Day 10: Implement async task handling for I/O-bound operations.
+
+Day 11: Add chunked transfer encoding support.
+
+Day 12: Implement gzip/deflate compression for responses.
+
+Day 13: Modularize core logic interface so it can plug into any framework.
+
+Day 14: Benchmark server performance for concurrent connections.
+
+Week 3 – Advanced HTTP Features
+
+Goal: Upgrade server to HTTP/2, HTTPS, and push features.
+
+Day 15: Implement HTTP/2 multiplexing support.
+
+Day 16: Add HTTP/2 header compression (HPACK).
+
+Day 17: Implement server push for HTTP/2.
+
+Day 18: Add TLS/HTTPS support (self-signed cert for testing).
+
+Day 19: Modularize protocol layer to allow switching between HTTP/1.1 and HTTP/2.
+
+Day 20: Benchmark HTTP/2 performance (latency & throughput).
+
+Day 21: Start exploring HTTP/3 with QUIC implementation (UDP layer).
+
+Week 4 – Other Protocols
+
+Goal: Extend server to support TCP, UDP, and FTP.
+
+Day 22: Implement a basic TCP server (accept connections, simple responses).
+
+Day 23: Implement a basic UDP server (connectionless responses).
+
+Day 24: Add simple FTP server (authentication + file transfer).
+
+Day 25: Modularize protocol handling so HTTP, TCP, UDP, FTP can plug in.
+
+Day 26: Benchmark TCP/UDP server throughput.
+
+Day 27: Add logging & monitoring for all protocols.
+
+Day 28: Review modular architecture and refactor for clarity.
+
+Week 5 – Performance Optimization
+
+Goal: Identify bottlenecks and implement fast modules in compiled languages.
+
+Day 29: Profile Python server to find CPU & I/O hotspots.
+
+Day 30: Rewrite one CPU-heavy module in Rust (PyO3) or C++ (pybind11).
+
+Day 31: Replace Python module with compiled module and test integration.
+
+Day 32: Benchmark improvement with compiled module.
+
+Day 33: Implement connection pooling for async tasks.
+
+Day 34: Optimize memory usage and garbage collection.
+
+Day 35: Add caching for repeated requests (LRU or Redis).
+
+Week 6 – Security, Reliability & Observability
+
+Goal: Make server secure, reliable, and production-ready.
+
+Day 36: Implement rate limiting and throttling.
+
+Day 37: Validate all inputs to prevent injection attacks.
+
+Day 38: Add graceful shutdown and error recovery.
+
+Day 39: Add logging & monitoring for security incidents.
+
+Day 40: Implement TLS certificate rotation support.
+
+Day 41: Containerize server using Docker.
+
+Day 42: Add Prometheus/Grafana metrics (latency, throughput, errors).
+
+Week 7 – Final Benchmarking & Deployment
+
+Goal: Test, benchmark, and deploy a fully-featured, modular, multi-protocol server.
+
+Day 43: Load-test HTTP/1.1 & HTTP/2 server (requests/sec, latency).
+
+Day 44: Load-test TCP & UDP server (throughput & packet loss).
+
+Day 45: Test modular interface with dummy Python frameworks.
+
+Day 46: CI/CD pipeline setup for testing, building, and deploying.
+
+Day 47: Centralize logging (ELK, Loki, or file logs).
+
+Day 48: Final benchmark & stress testing.
+
+Day 49: Optional: Begin HTTP/3 QUIC full implementation.
+
+Day 50: Review, document architecture, and finalize server for release.
